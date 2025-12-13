@@ -2,6 +2,9 @@ import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { createServerSupabaseClient } from '@/lib/supabase/server'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export const metadata: Metadata = {
   title: 'Admin Dashboard | Memorial Hub',
   description: 'Manage memorial content, RSVPs, and settings',

@@ -1,9 +1,6 @@
 import { AuthForm } from '@/components/auth/auth-form'
-import { Metadata } from 'next'
 
-export const metadata: Metadata = {
-    title: 'Register | Memorial',
-}
+export const dynamic = 'force-dynamic'
 
 export default function RegisterPage() {
     return <AuthForm view="register" />
