@@ -68,8 +68,7 @@ export async function moderateMemory(
       suggestedApproval: !result.flagged && sentiment !== 'negative',
     }
   } catch (error) {
-    console.error('Error moderating content:', error)
-    // Fail safe - require manual approval
+    // Fail safe - require manual approval on error
     return {
       flagged: false,
       categories: {
@@ -147,7 +146,6 @@ Respond in JSON format:
 
     return result
   } catch (error) {
-    console.error('Error generating tribute summary:', error)
     return {
       summary: 'Unable to generate summary at this time.',
       keyThemes: [],
@@ -228,7 +226,6 @@ ${personalNotes ? `Additional notes: ${personalNotes}` : ''}`,
 
     return result
   } catch (error) {
-    console.error('Error generating eulogy:', error)
     return {
       opening: '',
       mainBody: '',
@@ -303,7 +300,6 @@ Respond in JSON format:
 
     return result
   } catch (error) {
-    console.error('Error generating chatbot response:', error)
     return {
       answer:
         "I'm sorry, I'm having trouble answering that right now. Please check the service details section or contact the family directly.",
@@ -344,7 +340,6 @@ export async function describeMemoryPhoto(
 
     return response.choices[0].message.content
   } catch (error) {
-    console.error('Error describing photo:', error)
     return null
   }
 }
