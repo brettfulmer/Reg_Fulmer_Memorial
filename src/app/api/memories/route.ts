@@ -44,10 +44,7 @@ export async function POST(request: NextRequest) {
         .from('memories')
         .upload(fileName, photo)
 
-      if (uploadError) {
-        console.error('Photo upload error:', uploadError)
-        // Continue without photo or throw? Let's continue.
-      } else {
+      if (!uploadError) {
         const { data: { publicUrl } } = supabase.storage
           .from('memories')
           .getPublicUrl(fileName)
@@ -62,9 +59,7 @@ export async function POST(request: NextRequest) {
         .from('memories')
         .upload(fileName, audio)
 
-      if (uploadError) {
-        console.error('Audio upload error:', uploadError)
-      } else {
+      if (!uploadError) {
         const { data: { publicUrl } } = supabase.storage
           .from('memories')
           .getPublicUrl(fileName)
@@ -82,7 +77,7 @@ export async function POST(request: NextRequest) {
         photo_url,
         audio_url,
         can_share_at_service,
-        approved: autoApprove, // AI-powered auto-approval
+        approved: autoApprove,
       })
       .select()
       .single()
@@ -91,7 +86,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ data })
   } catch (error: any) {
-    console.error('Memory error:', error)
     return NextResponse.json(
       { error: error.message || 'Failed to create memory' },
       { status: 500 }
@@ -99,14 +93,33 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Keep GET mocked or implement it? The frontend sends specific queries via client, 
-// so this GET endpoint might not be used by the new components. 
-// But let's implement it for completeness if the old code uses it.
 export async function GET(request: NextRequest) {
-  // ... (omitted for brevity, assume frontend uses direct supabase or this)
-  // Actually the current MemoriesSection relies on realtime subscription and initialprops,
-  // so this might not be critical. leaving it as mocked/empty for now to save tokens/time
-  // unless I see it's used.
-  // Wait, MemoriesSection calls /api/memories only for POST.
-  return NextResponse.json({ message: "GET not implemented via API, use Supabase Client" })
+  try {
+    const supabase = await createServerSupabaseClient()
+    const searchParams = request.nextUrl.searchParams
+    const memorialId = searchParams.get('memorial_id')
+
+    if (!memorialId) {
+      return NextResponse.json(
+        { error: 'Memorial ID required' },
+        { status: 400 }
+      )
+    }
+
+    const { data: memories, error } = await supabase
+      .from('memory_posts')
+      .select('*')
+      .eq('memorial_id', memorialId)
+      .eq('approved', true)
+      .order('created_at', { ascending: false })
+
+    if (error) throw error
+
+    return NextResponse.json({ data: memories || [] })
+  } catch (error: any) {
+    return NextResponse.json(
+      { error: error.message || 'Failed to fetch memories' },
+      { status: 500 }
+    )
+  }
 }
