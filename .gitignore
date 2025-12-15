@@ -31,9 +31,14 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
-# Vercel
+# Deployment
 .vercel
+.netlify/
 
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Vite
+dist-ssr
+*.local

@@ -1,7 +1,4 @@
-'use client'
-
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import { Countdown } from '@/components/ui/countdown'
 import { formatDateRange } from '@/lib/utils'
 import type { Memorial, ServiceEvent } from '@/types'
@@ -33,12 +30,11 @@ export function HeroSection({ memorial, serviceEvent }: HeroSectionProps) {
             className="mb-10"
           >
             <div className="relative w-48 h-48 md:w-64 md:h-64 mx-auto rounded-full overflow-hidden border-2 border-accent-gold/30 shadow-glow">
-              <Image
+              <img
                 src={memorial.hero_photo_url}
                 alt={memorial.full_name}
-                fill
-                className="object-cover"
-                priority
+                className="w-full h-full object-cover"
+                loading="eager"
               />
             </div>
           </motion.div>

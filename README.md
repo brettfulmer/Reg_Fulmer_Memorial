@@ -1,49 +1,35 @@
-# Reg Fulmer Memorial Hub
+# Reg Fulmer Memorial Site
 
-A premium memorial website for Reginald "Reg" Fulmer, built with Next.js 14, Tailwind CSS, and Supabase.
-
-![Stack](https://img.shields.io/badge/Next.js-14-black) ![Tailwind](https://img.shields.io/badge/Tailwind-3.4-38bdf8) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+A memorial website for Reginald "Reg" Fulmer, built with Vite + React + TypeScript.
 
 ## Features
 
-### Core
 - **Responsive dark theme** with warm gold accents
 - **Live countdown** to service
-- **One-tap actions**: Add to calendar (.ics), share, directions
-- **Mobile-first** with sticky bottom nav
+- **Service details** with calendar integration
+- **RSVP system** for tracking attendance
+- **Travel concierge** with local recommendations
+- **Livestream information** for virtual attendance
+- **Memories wall** for sharing tributes
+- **Timeline** showcasing life milestones
+- **Mobile-first design** with smooth animations
 
-### RSVP System
-- In-person / online / not attending options
-- Guest count, dietary requirements, accessibility needs
-- Real-time attendance counter
-- Duplicate email handling (updates existing RSVP)
+## Tech Stack
 
-### Travel Concierge
-- Tabbed categories: Flights, Stay, Getting Around, Food & Coffee, Before/After, Explore
-- Curated local recommendations
-- Google Maps integration
-
-### Livestream
-- Pre-stream countdown with timezone detection
-- Copy link functionality
-- Viewing tips
-
-### Memories Wall
-- Text messages with optional photos
-- Permission toggle for service sharing
-- Chronological timeline with relative timestamps
-
-### Voice Agent (Coming Soon)
-- ElevenLabs integration ready
-- FAQ automation
-- Fallback phone support
+- **Framework**: Vite 7 + React 18
+- **Language**: TypeScript 5
+- **Styling**: Tailwind CSS 3.4
+- **Animation**: Framer Motion 12
+- **Icons**: Lucide React
+- **Routing**: React Router DOM 7
+- **Build Tool**: Vite
 
 ## Quick Start
 
 ### Prerequisites
-- Node.js 18+
+
+- Node.js 18+ 
 - npm or yarn
-- Supabase account (for production)
 
 ### Development
 
@@ -51,127 +37,107 @@ A premium memorial website for Reginald "Reg" Fulmer, built with Next.js 14, Tai
 # Install dependencies
 npm install
 
-# Create .env.local from template
-cp .env.example .env.local
-
-# Run development server
+# Start development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) — redirects to `/m/reg-fulmer`
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ### Production Build
 
 ```bash
+# Build for production
 npm run build
-npm run start
+
+# Preview production build
+npm run preview
 ```
 
 ## Project Structure
 
 ```
 src/
-├── app/
-│   ├── api/
-│   │   ├── memories/route.ts    # Memory posts API
-│   │   └── rsvp/route.ts        # RSVP API
-│   ├── m/[slug]/page.tsx        # Memorial page
-│   ├── globals.css              # Tailwind + custom styles
-│   ├── layout.tsx               # Root layout
-│   └── page.tsx                 # Home (redirects)
 ├── components/
-│   ├── sections/
+│   ├── sections/         # Page sections
 │   │   ├── hero-section.tsx
 │   │   ├── service-section.tsx
 │   │   ├── rsvp-section.tsx
 │   │   ├── livestream-section.tsx
 │   │   ├── travel-section.tsx
 │   │   ├── memories-section.tsx
+│   │   ├── timeline-section.tsx
 │   │   ├── voice-agent-section.tsx
 │   │   ├── quick-actions-bar.tsx
 │   │   └── footer.tsx
-│   └── ui/
+│   └── ui/               # Reusable UI components
 │       ├── button.tsx
 │       ├── card.tsx
 │       ├── countdown.tsx
 │       ├── input.tsx
 │       ├── select.tsx
 │       └── textarea.tsx
+├── data/
+│   └── memorialContent.ts  # Memorial data and content
 ├── lib/
-│   ├── supabase/
-│   │   ├── client.ts            # Browser client
-│   │   └── server.ts            # Server client
-│   └── utils.ts                 # Helpers
-└── types/
-    └── index.ts                 # TypeScript types
+│   ├── types/            # TypeScript type definitions
+│   └── utils.ts          # Utility functions
+├── pages/
+│   └── MemorialPage.tsx  # Main memorial page
+├── App.tsx               # Root app component
+├── main.tsx              # App entry point
+└── styles.css            # Global styles and Tailwind
 ```
 
-## Database Setup (Supabase)
+## Customization
 
-1. Create a new Supabase project
-2. Run the schema in `supabase/schema.sql`
-3. Add your Supabase URL and anon key to `.env.local`
+### Theme Colors
 
-The schema includes seed data for Reg Fulmer's memorial.
-
-## Configuration
-
-### Environment Variables
-
-```env
-# Required for production
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
-
-# Optional
-NEXT_PUBLIC_SITE_URL=https://memorial.regfulmer.au
-ELEVENLABS_API_KEY=for_voice_agent
-RESEND_API_KEY=for_email_notifications
-```
-
-### Customisation
-
-**Theme colours** — `tailwind.config.ts`:
+Edit `tailwind.config.ts`:
 - `accent-gold`: Primary accent (#d4a574)
 - `background`: Dark base (#0a0a0a)
 
-**Fonts** — Google Fonts loaded in `globals.css`:
-- Headings: Cormorant Garamond
-- Body: DM Sans
+### Fonts
 
-## Deployment
+Fonts are loaded via Google Fonts in `src/styles.css`:
+- **Display/Headings**: Cormorant Garamond
+- **Body**: DM Sans
 
-### Vercel (Recommended)
+### Content
 
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-```
-
-### Other Platforms
-Standard Next.js deployment. Ensure environment variables are set.
+Update memorial content in `src/data/memorialContent.ts`:
+- Memorial information
+- Service event details
+- Travel tips
+- Voice agent configuration
 
 ## Service Details
 
-| | |
-|---|---|
+| Field | Value |
+|-------|-------|
 | **Event** | Celebration of Life |
 | **Date** | Thursday 22 January 2026 |
 | **Time** | 2:00 PM AEDT |
 | **Venue** | Horizons at South Maroubra Surf Club |
 | **Address** | Marine Parade, Maroubra NSW 2035 |
 
-## Tech Stack
+## Deployment
 
-- **Framework**: Next.js 14 (App Router)
-- **Styling**: Tailwind CSS 3.4
-- **Animation**: Framer Motion
-- **Icons**: Lucide React
-- **Database**: Supabase (PostgreSQL)
-- **Deployment**: Vercel
+### Netlify
+
+1. Connect your repository to Netlify
+2. Build command: `npm run build`
+3. Publish directory: `dist`
+
+### Vercel
+
+1. Connect your repository to Vercel
+2. Framework preset: Vite
+3. Build command: `npm run build`
+4. Output directory: `dist`
+
+### Other Platforms
+
+The site is a standard Vite + React application. Build the `dist` folder and deploy it to any static hosting service.
 
 ## License
 

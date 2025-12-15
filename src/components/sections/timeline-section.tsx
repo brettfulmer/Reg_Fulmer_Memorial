@@ -1,4 +1,3 @@
-'use client'
 
 import { motion } from 'framer-motion'
 import { Calendar, Heart, Home, Star, Baby, Briefcase } from 'lucide-react'
