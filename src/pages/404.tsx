@@ -1,10 +1,10 @@
 import Head from 'next/head'
 
-export default function ServerError() {
+export default function NotFound() {
   return (
     <>
       <Head>
-        <title>Server Error</title>
+        <title>Page Not Found</title>
       </Head>
       <main
         style={{
@@ -26,7 +26,7 @@ export default function ServerError() {
               fontWeight: 400,
             }}
           >
-            Server Error
+            Page Not Found
           </h1>
           <p
             style={{
@@ -34,7 +34,7 @@ export default function ServerError() {
               marginBottom: '2rem',
             }}
           >
-            We apologize for the inconvenience. Please try again later.
+            We couldn’t find the page you’re looking for.
           </p>
           <a
             href="/"
@@ -55,3 +55,4 @@ export default function ServerError() {
     </>
   )
 }
+
