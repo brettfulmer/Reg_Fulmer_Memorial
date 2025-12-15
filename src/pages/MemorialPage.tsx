@@ -19,7 +19,7 @@ function MemorialPage() {
     return <Navigate to="/m/reg-fulmer" replace />
   }
 
-  const pageUrl = `${window.location.origin}/m/${slug}`
+  const pageUrl = `${import.meta.env.BASE_URL || ''}m/${slug}`
 
   return (
     <main className="min-h-screen pb-20 md:pb-0">

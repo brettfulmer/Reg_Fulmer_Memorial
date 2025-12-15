@@ -34,7 +34,7 @@ export const serviceEvent: ServiceEvent = {
   after_gathering_title: 'Gathering afterwards',
   after_gathering_details: 'Family and friends are welcome to stay at Horizons after the service to share memories and spend time together. Light refreshments will be available.',
   livestream_enabled: true,
-  livestream_url: 'https://memorial.regfulmer.au/live',
+  livestream_url: '/live',
   livestream_notes: 'Stream opens around 1:50 pm AEDT. If it doesn\'t start immediately, refresh the page.',
   created_at: new Date().toISOString(),
   updated_at: new Date().toISOString(),
